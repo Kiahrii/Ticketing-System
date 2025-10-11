@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 01, 2025 at 07:40 AM
+-- Host: 127.0.0.1:3307
+-- Generation Time: Oct 11, 2025 at 03:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `maintix`
 --
+CREATE DATABASE IF NOT EXISTS `maintix` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `maintix`;
 
 -- --------------------------------------------------------
 
@@ -29,14 +31,31 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `concern` (
   `concern_id` int(11) NOT NULL,
-  `concern_name` enum('Missing Keyboard','Missing Mouse','Missing Cables','Non-working Keyboard','Non-working Mouse','Non-working PCs','Need Cleaning') NOT NULL,
-  `concern_install` varchar(50) DEFAULT NULL,
-  `concern_other` varchar(255) DEFAULT NULL
+  `concern_name` enum('Mouse Missing','Mouse Relocated','Mouse not Working','Keyboard Missing','Keyboard Relocated','Keyboard not Working','Monitor not Working','Monitor Dotted Screen/Lines Visible','Cabling not Proper/need fixing','CPU Damaged/Boot Error','Slow Performance','Software not Installed','Need Cleaning','Need Air-conditioning Fix','Others') NOT NULL,
+  `concern_install` int(11) DEFAULT NULL,
+  `concern_other` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- RELATIONSHIPS FOR TABLE `concern`:
+-- Dumping data for table `concern`
 --
+
+INSERT INTO `concern` (`concern_id`, `concern_name`, `concern_install`, `concern_other`) VALUES
+(1, 'Mouse Missing', NULL, NULL),
+(2, 'Mouse Relocated', NULL, NULL),
+(3, 'Mouse not Working', NULL, NULL),
+(4, 'Keyboard Missing', NULL, NULL),
+(5, 'Keyboard Relocated', NULL, NULL),
+(6, 'Keyboard not Working', NULL, NULL),
+(7, 'Monitor not Working', NULL, NULL),
+(8, 'Monitor Dotted Screen/Lines Visible', NULL, NULL),
+(9, 'Cabling not Proper/need fixing', NULL, NULL),
+(10, 'CPU Damaged/Boot Error', NULL, NULL),
+(11, 'Slow Performance', NULL, NULL),
+(12, 'Software not Installed', NULL, NULL),
+(13, 'Need Cleaning', NULL, NULL),
+(14, 'Need Air-conditioning Fix', NULL, NULL),
+(15, 'Others', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -48,14 +67,6 @@ CREATE TABLE `request` (
   `ticket_id` int(11) NOT NULL,
   `concern_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELATIONSHIPS FOR TABLE `request`:
---   `concern_id`
---       `concern` -> `concern_id`
---   `ticket_id`
---       `ticket` -> `ticket_id`
---
 
 -- --------------------------------------------------------
 
@@ -69,15 +80,9 @@ CREATE TABLE `ticket` (
   `lab_room` enum('ITS 200','ITS 201','MAC LAB','PTC 303','PTC 304','PTC 305','PTC 306') NOT NULL,
   `status` enum('Pending','Approved','Declined','In Progress','Resolved') NOT NULL,
   `priority` enum('low','normal','high','urgent') NOT NULL,
-  `date_submitted` date NOT NULL DEFAULT current_timestamp(),
-  `date_resolved` date DEFAULT current_timestamp()
+  `date_submitted` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_resolved` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- RELATIONSHIPS FOR TABLE `ticket`:
---   `employee_id`
---       `user_info` -> `employee_id`
---
 
 -- --------------------------------------------------------
 
@@ -90,16 +95,20 @@ CREATE TABLE `user_info` (
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `tin_no` varchar(11) NOT NULL,
-  `department` enum('CITE','CEA') NOT NULL,
+  `department` enum('CITE','CEA','CAS','CMA','CCJE') DEFAULT NULL,
   `username` varchar(50) NOT NULL,
-  `password_hash` varchar(20) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
   `user_type` enum('requester','admin') NOT NULL DEFAULT 'requester',
   `user_status` enum('active','inactive') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- RELATIONSHIPS FOR TABLE `user_info`:
+-- Dumping data for table `user_info`
 --
+
+INSERT INTO `user_info` (`employee_id`, `first_name`, `last_name`, `tin_no`, `department`, `username`, `password_hash`, `user_type`, `user_status`) VALUES
+(7, 'Keziah', 'Garcia', '123-321-213', 'CITE', 'kego.garcia.up@phinmaed.com', '$2y$10$..AcJXFxONMpR77mvuifr.XEbdjl.Bs74eEjlZFxw06iWlPK4ABFC', 'requester', 'active'),
+(8, 'admin', 'Administrator', '000-000-000', 'CITE', 'admin.maintix.up@phinmaed.com', '$2y$10$X1rbOkTYpg48pPKwYx4GY.HQxIE4hmegCr0qYhsb08DPfP7sQKi6O', 'admin', 'active');
 
 --
 -- Indexes for dumped tables
@@ -122,7 +131,7 @@ ALTER TABLE `request`
 -- Indexes for table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`ticket_id`,`employee_id`),
+  ADD PRIMARY KEY (`ticket_id`),
   ADD KEY `fk_employee_id_ticket` (`employee_id`);
 
 --
@@ -130,7 +139,9 @@ ALTER TABLE `ticket`
 --
 ALTER TABLE `user_info`
   ADD PRIMARY KEY (`employee_id`),
-  ADD UNIQUE KEY `username_unique` (`tin_no`,`username`);
+  ADD UNIQUE KEY `username_unique` (`tin_no`,`username`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `tin_no` (`tin_no`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -140,19 +151,19 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `concern`
 --
 ALTER TABLE `concern`
-  MODIFY `concern_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `concern_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
