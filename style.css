@@ -1,0 +1,225 @@
+/* Reset */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+} 
+
+body, html { 
+  height: 100%; 
+  color: #333; 
+  font-family: 'Poppins', sans-serif; /*Poppins*/
+}  
+
+/*Background Container*/
+.background { 
+  background: linear-gradient(#27ff5a,#000000);
+  height: 100vh; 
+  width: 100%; 
+  position: relative; 
+  overflow: hidden; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+} 
+
+/*Landing Page*/
+.landing-page { 
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1; 
+  opacity: 1; 
+  transition: opacity 0.5s ease; 
+} 
+
+.landing-page.hide { 
+  opacity: 0; 
+  pointer-events: none; 
+} 
+
+/*Landing Content*/
+.landing-content { 
+  text-align: center; 
+  padding: 0 20px; 
+  max-width: 500px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 19.2px; 
+} 
+
+.landing-content h1 { 
+  font-family: 'Cambria'; 
+  font-size: 144px; 
+  color: #ffffff; 
+  font-weight: 700; 
+  letter-spacing: 3px; 
+} 
+
+.landing-content p { 
+  font-size: 20px; 
+  color: #ffffff; 
+  max-width: 400px; 
+} 
+
+.green-btn { 
+  width: 250px; 
+  padding: 18px 20px; 
+  font-size: 20.8px; 
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  transition: background 0.3s ease; 
+} 
+
+.green-btn:hover { 
+  background-color: #45a049; 
+} 
+
+/* Form Container */
+.form-container {
+  opacity: 0;
+  top: 50%;
+  left: 50%; /* center horizontally */
+  transform: translate(-50%, -50%); /* center vertically & horizontally */
+  transition: all 0.5s ease;
+  pointer-events: none;
+  z-index: 2;
+  position: absolute;
+  max-width: 500px;
+  width: 90%; /* responsive */
+}
+
+.form-container.show { 
+  opacity: 1; 
+  pointer-events: auto; 
+} 
+
+/* Form Box */
+.form-box { 
+  width: 100%; 
+  min-height: 660px; 
+  padding: 10px 20px; 
+  display: none; 
+  background: #ccf5e7; 
+  border-radius: 12px; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); 
+} 
+
+.form-box.active { 
+  display: block; 
+} 
+
+/* Titles and Subtitles */
+.system-title { 
+  font-family: 'Orbitron', sans-serif; 
+  font-size: 43px; 
+  text-align: center; 
+  font-weight: 700; 
+  padding-top: 30px; 
+  margin-bottom: 35px; 
+  color: #1b3a1a; 
+  letter-spacing: 2px; 
+} 
+
+.form-subtitle-center { 
+  font-size: 28px; 
+  text-align: center; 
+  font-weight: 500; 
+  margin-bottom: 50px; 
+  color: #333; 
+} 
+
+.form-subtitle-left { 
+  font-size: 17px; 
+  text-align: left; 
+  padding-left: 12px; 
+  margin-bottom: 5px; 
+  font-weight: 500; 
+} 
+
+/* Form Inputs */
+input, select { 
+  width: 100%; 
+  padding: 17px; 
+  background: #f5f5f5; 
+  border-radius: 8px; 
+  border: none; 
+  outline: none; 
+  font-size: 17px; 
+  margin-bottom: 15px; 
+  transition: 0.2s ease; 
+} 
+
+input:focus, select:focus { 
+  background: #fff; 
+  border: 1px solid #4CAF50; 
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5); 
+} 
+
+/* Form Buttons */
+button { 
+  width: 50%; 
+  padding: 17px; 
+  margin: 0 auto 15px; 
+  display: block; 
+  background: linear-gradient(135deg, #4CAF50, #81C784); 
+  border: none; 
+  border-radius: 8px; 
+  color: #fff; 
+  font-weight: 600; 
+  font-size: 17px; 
+  cursor: pointer; 
+  transition: background 0.3s ease, transform 0.3s ease; 
+} 
+
+button:hover { 
+  background: linear-gradient(135deg, #388E3C, #66BB6A); 
+  transform: translateY(-2px); 
+} 
+
+/* Form Grid & Layout */
+.form-grid { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 4px; 
+} 
+
+.form-group { 
+  width: 100%; 
+} 
+
+.form-button-center { 
+  grid-column: span 2; 
+  display: flex; 
+  justify-content: center; 
+  margin-top: 10px; 
+} 
+
+/* Text and Links */
+p { 
+  font-size: 17px; 
+  text-align: center; 
+  margin-bottom: 5px; 
+} 
+
+p a { 
+  color: #2e7d32; 
+  text-decoration: none; 
+} 
+
+p a:hover { 
+  text-decoration: underline; 
+} 
+
+.forgot-password { 
+  text-align: right; 
+  margin-bottom: 35px; 
+  font-size: 17px; 
+} 

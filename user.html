@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MainTix - User Dashboard</title>
+  <link rel="stylesheet" href="user.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="background">
+    <!-- Notification -->
+    <div id="notification" class="notification hidden">Request Sent</div>
+
+    <!-- Main Title -->
+    <header class="dashboard-title">
+      <h1>MAINTIX</h1>
+      <nav class="nav-tabs">
+        <button id="navRooms" class="tab-btn">Rooms</button>
+        <button id="navRequests" class="tab-btn">Requests</button>
+      </nav>
+    </header>
+
+    <main class="rooms-section">
+      <h2>Computer Labs</h2>
+      
+      <div class="rooms-grid">
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=ITS+200" alt="ITS 200" />
+          <button name="room" value="ITS 200"> <a href="ticket_form.php?room=ITS+200">ITS 200</a></button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=ITS+201" alt="ITS 201" />
+          <button name="room" value="ITS 201">ITS 201</button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=MAC+Lab" alt="MAC Lab" />
+          <button name="room" value="MAC Lab">MAC Lab</button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=PTC+303" alt="PTC 303" />
+          <button name="room" value="PTC 303">PTC 303</button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=PTC+304" alt="PTC 304" />
+          <button name="room" value="PTC 304">PTC 304</button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=PTC+305" alt="PTC 305" />
+          <button name="room" value="PTC 305">PTC 305</button>
+        </div>
+        <div class="room-card">
+          <img src="https://via.placeholder.com/150?text=PTC+306" alt="PTC 306" />
+          <button name="room" value="PTC 306">PTC 306</button>
+        </div>
+      </div>
+      
+    </main>
+
+    <section class="request-section">
+      <h2>Requests</h2>
+      <div id="requestList">
+        <p>No requests submitted yet.</p>
+      </div>
+    </section>
+
+    <!-- Profile Sidebar -->
+    <div class="profile-sidebar">
+      <div class="profile-circle">
+        <img src="../assets/user-svgrepo-com.svg" alt="Profile" />
+      </div>
+      <span id="profileName">User</span>
+
+      <!-- Logout Icon -->
+      <button id="logoutBtn" class="logout-btn">
+        <img src="../assets/logout-bracket-svgrepo-com.svg" alt="Logout" width="24" height="24" />
+      </button>
+    </div>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutModal" class="logout-modal hidden">
+      <div class="logout-modal-content">
+        <p>Are you sure to Logout?</p>
+        <div class="modal-buttons">
+          <button id="confirmLogoutBtn" class="modal-yes">Yes</button>
+          <button id="cancelLogoutBtn" class="modal-no">No</button>
+        </div>
+      </div>
+    </div>
+
+    Modal
+    <div id="requestModal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Requesting Form</h2>
+        <p>Report Issues - <span id="modalRoomName">Room Name</span></p>
+
+        <form id="requestForm" action="ticket_form.php" method="post">
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="issues[]" value="1" /> Mouse Missing</label>
+            <label><input type="checkbox" name="issues[]" value="2" /> Mouse Relocated</label>
+            <label><input type="checkbox" name="issues[]" value="3" /> Mouse Not Working</label>
+            <label><input type="checkbox" name="issues[]" value="4" /> Keyboard Missing</label>
+            <label><input type="checkbox" name="issues[]" value="5" /> Keyboard Relocated</label>
+            <label><input type="checkbox" name="issues[]" value="6" /> Keyboard not Working</label>
+            <label><input type="checkbox" name="issues[]" value="7" /> Monitor not Working</label>
+            <label><input type="checkbox" name="issues[]" value="8" /> Monitor Dotted Screen/Lines Visible</label>
+            <label><input type="checkbox" name="issues[]" value="9" /> Cabling not Proper/Need Fixing</label>
+            <label><input type="checkbox" name="issues[]" value="10" /> CPU Damaged/Boot Error</label>
+            <label><input type="checkbox" name="issues[]" value="11" /> Slow Performance</label>
+            <label><input type="checkbox" name="issues[]" value="12" id="installSoftwareCheckbox" /> Software not Installed</label>
+            <label><input type="checkbox" name="issues[]" value="13" /> Need Cleaning</label>
+            <label><input type="checkbox" name="issues[]" value="14" /> Need Air-conditioning Fix</label>
+            <label><input type="checkbox" name="issues[]" value="15" id="OtherIssueCheckbox" /> Other Issue</label>
+          </div>
+
+          <div class="specify-group" id="specifyGroup" style="display: none;">
+            <label>Specify: <input type="text" name="specify" /></label>
+          </div>
+
+          <div class="other-issue-group" id="specifyOther" style="display: none;">
+            <label>Other Issue: <input type="text" name="otherIssue" /></label>
+          </div>
+
+          <div class="priority-group">
+            <p>Priority:</p>
+            <label><input type="checkbox" name="priority" value="Low" /> Low</label>
+            <label><input type="checkbox" name="priority" value="Normal" /> Normal</label>
+            <label><input type="checkbox" name="priority" value="High" /> High</label>
+            <label><input type="checkbox" name="priority" value="Urgent" /> Urgent</label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" name="submit_issues">Submit Request</button>
+            <button type="button" id="cancelRequestBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="user.js"></script>
+  </div>
+</body>
+
+</html>

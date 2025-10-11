@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MainTix - Admin Dashboard</title>
+
+  <link rel="stylesheet" href="admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>  
+<body>
+
+  <div class="background">
+
+    <!-- Header Section: Admin Dashboard Title and Navigation Tabs -->
+    <header class="dashboard-title">
+      <h1>MAINTIX ADMIN</h1>
+      <nav class="nav-tabs">
+        <button id="navDashboard" class="tab-btn active">Dashboard</button>
+        <button id="navProfile" class="tab-btn">Profile</button>
+        <button id="navManage" class="tab-btn">Manage Accounts</button>
+      </nav>
+    </header>
+
+    <!-- Admin Sidebar with Admin Icon, Name and Logout Button -->
+    <div class="admin-sidebar">
+      <div class="admin-circle">
+        <img src="../assets/user-check-svgrepo-com.svg" alt="Admin Icon" />
+      </div>
+      <span id="adminName">ADMIN</span>
+      
+      <!-- Logout Button with Icon -->
+      <button id="logoutBtn" class="admin-logout-btn">
+        <img src="../assets/logout-bracket-svgrepo-com.svg" alt="Logout" width="24" height="24"/>
+      </button>
+    </div>
+
+    <!-- Admin Logout Confirmation Modal (Hidden by default) -->
+    <div id="adminLogoutModal" class="admin-logout-modal hidden">
+      <div class="admin-logout-modal-content">
+        <p>Are you sure you want to Logout?</p>
+        <div class="modal-buttons">
+          <button id="adminConfirmLogoutBtn" class="modal-yes">Yes</button>
+          <button id="adminCancelLogoutBtn" class="modal-no">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Dashboard Section (Visible by default) -->
+    <main class="tab-section dashboard-section active">
+      <h2>STATISTIC</h2>
+
+      <!-- Stats Grid: Displays different status counts -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h3>Total Request</h3>
+          <p class="stat-value">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Pending</h3>
+          <p class="stat-value">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>In Progress</h3>
+          <p class="stat-value">0</p>
+        </div>
+        <div class="stat-box">
+          <h3>Completed</h3>
+          <p class="stat-value">0</p>
+        </div>
+      </div>
+
+      <!-- Control Buttons for Dashboard -->
+      <div class="dashboard-buttons">
+        <button class="dash-btn">Request</button>
+        <button class="dash-btn">Pending</button>
+        <button class="dash-btn">Completed</button>
+      </div>
+
+      <!-- Request Filters Section (Allows searching and filtering requests) -->
+      <div class="request-filters">
+        <input type="text" id="searchBox" placeholder="Search requests..." />
+        <select id="priorityFilter">
+          <option value="">Filter by Priority</option>
+          <option value="Low">Low</option>
+          <option value="Normal">Normal</option>
+          <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
+        </select>
+        <select id="roomFilter">
+          <option value="">Filter by Room</option>
+          <option value="ITS 200">ITS 200</option>
+          <option value="ITS 201">ITS 201</option>
+          <option value="MAC Lab">MAC Lab</option>
+          <option value="PTC 303">PTC 303</option>
+          <option value="PTC 304">PTC 304</option>
+          <option value="PTC 305">PTC 305</option>
+          <option value="PTC 306">PTC 306</option>
+        </select>
+      </div>
+
+      <!-- Requests Section (Where request boxes are displayed) -->
+      <div class="requests-section">
+        <!-- New request boxes will be appended here dynamically -->
+      </div>
+    </main>
+  
+
+    <!-- PROFILE Section -->
+    <section class="tab-section profile-section">
+      <h2>PROFILE</h2>
+
+      <div class="profile-container">
+        <!-- Profile Header with Icon and Admin Name -->
+        <div class="profile-header">
+          <div class="profile-icon-circle">
+            <img src="../assets/user-check-svgrepo-com.svg" alt="Profile Icon" class="profile-icon" />
+          </div>
+          <div class="profile-name-container">
+            <span class="profile-temp-name">Name</span>
+            <span class="profile-role">ADMIN</span>
+          </div>
+        </div>
+
+        <!-- Profile Info Boxes (Username/Email, Account Creation, etc.) -->
+        <div class="profile-info">
+          <div class="info-box">
+            <span class="info-label">Username/Email</span>
+            <span class="info-value">admin@example.com</span>
+          </div>
+          <div class="info-box">
+            <span class="info-label">Account Created</span>
+            <span class="info-value">01/01/2025</span>
+          </div>
+        </div>
+
+        <!-- More Profile Info Boxes (TIN No., Department, etc.) -->
+        <div class="profile-info">
+          <div class="info-box">
+            <span class="info-label">TIN No.</span>
+            <span class="info-value">123-456-789</span>
+          </div>
+          <div class="info-box">
+            <span class="info-label">Department</span>
+            <span class="info-value">IT Department</span>
+          </div>
+        </div>
+
+        <!-- Change Password Link -->
+        <div class="change-password">
+          <a href="#">Change password</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANAGE ACCOUNTS Section -->
+    <section class="tab-section manage-section">
+      <h2>MANAGE ACCOUNTS</h2>
+
+      <!-- Controls for managing accounts (search and add new account) -->
+      <div class="manage-controls">
+        <input type="text" placeholder="Search accounts..." class="search-account" />
+        <button class="dash-btn add-account-btn">+ Add Account</button>
+      </div>
+
+      <!-- Accounts List (Starts empty, accounts will be added dynamically) -->
+      <div class="accounts-list"></div>
+    </section>
+
+    <!-- Delete Confirmation Modal (Hidden by default) -->
+    <div class="delete-modal hidden">
+      <div class="delete-modal-content">
+        <p>Are you sure you want to delete?</p>
+        <div class="modal-buttons">
+          <button class="modal-yes">Yes</button>
+          <button class="modal-no">No</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- External JS script for dashboard logic -->
+  <script src="admin.js"></script>
+
+</body>
+</html>

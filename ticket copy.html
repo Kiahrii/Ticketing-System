@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="user.css" /> 
+</head>
+<body>
+  <h1> Concern </h1>
+
+  <div id="requestModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Requesting Form</h2>
+      <p>Report Issues - <span id="modalRoomName">Room Name</span></p>
+
+      <form id="requestForm" action="ticket_form.php" method="post">
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="issues[]" value="1" /> Mouse Missing</label>
+          <label><input type="checkbox" name="issues[]" value="2" /> Mouse Relocated</label>
+          <label><input type="checkbox" name="issues[]" value="3" /> Mouse Not Working</label>
+          <label><input type="checkbox" name="issues[]" value="4" /> Keyboard Missing</label>
+          <label><input type="checkbox" name="issues[]" value="5" /> Keyboard Relocated</label>
+          <label><input type="checkbox" name="issues[]" value="6" /> Keyboard not Working</label>
+          <label><input type="checkbox" name="issues[]" value="7" /> Monitor not Working</label>
+          <label><input type="checkbox" name="issues[]" value="8" /> Monitor Dotted Screen/Lines Visible</label>
+          <label><input type="checkbox" name="issues[]" value="9" /> Cabling not Proper/Need Fixing</label>
+          <label><input type="checkbox" name="issues[]" value="10" /> CPU Damaged/Boot Error</label>
+          <label><input type="checkbox" name="issues[]" value="11" /> Slow Performance</label>
+          <label><input type="checkbox" name="issues[]" value="12" id="installSoftwareCheckbox" /> Software not
+            Installed</label>
+          <label><input type="checkbox" name="issues[]" value="13" /> Need Cleaning</label>
+          <label><input type="checkbox" name="issues[]" value="14" /> Need Air-conditioning Fix</label>
+          <label><input type="checkbox" name="issues[]" value="15" id="OtherIssueCheckbox" /> Other Issue</label>
+        </div>
+
+        <div class="specify-group" id="specifyGroup" style="display: none;">
+          <label>Specify: <input type="text" name="specify" /></label>
+        </div>
+
+        <div class="other-issue-group" id="specifyOther" style="display: none;">
+          <label>Other Issue: <input type="text" name="otherIssue" /></label>
+        </div>
+
+        <div class="priority-group">
+          <p>Priority:</p>
+          <label><input type="checkbox" name="priority" value="Low" /> Low</label>
+          <label><input type="checkbox" name="priority" value="Normal" /> Normal</label>
+          <label><input type="checkbox" name="priority" value="High" /> High</label>
+          <label><input type="checkbox" name="priority" value="Urgent" /> Urgent</label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" name="submit_issues">Submit Request</button>
+          <button type="button" id="cancelRequestBtn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="user.js"></script> 
+
+
+
+
+    <!-- <form action="ticket_form_test.php" method="post">
+            <input type="text" name="Ticket_form" placeholder="Ticket Method"><br><br>
+            <input type = "checkbox" id="concern1" name="concerns[]" value="1">
+            <label for = "Missing Keyboard"> Missing Keyboard </label><br>
+            <input type = "checkbox" id="concern2" name="concerns[]" value="2">
+            <label for = "Missing Mouse"> Missing Mouse </label><br>
+            <input type = "checkbox" id="concern3" name="concerns[]" value="3">
+            <label for = "Missing Cables"> Missing Cables </label><br>
+            <input type = "checkbox" id="concern4" name="concerns[]" value="4">
+            <label for = "Non-working Keyboard"> Non-working Keyboard </label><br>
+            <input type = "checkbox" id="concern5" name="concerns[]" value="5">
+            <label for = "Non-working Mouse"> Non-working Mouse </label><br>
+            <input type = "checkbox" id="concern6" name="concerns[]" value="6">
+            <label for = "Non-working PCs"> Non-working PCs </label><br>
+            <input type = "checkbox" id="concern7" name="concerns[]" value="7">
+            <label for = "Need Cleaning"> Need Cleaning </label><br>
+            <input type = "checkbox" id="concern8" name="concerns[]" value="8">
+            <label for = "Software Installtion"> Software Installtion </label><br>
+            <input type = "checkbox" id="concern9" name="concerns[]" value="9">
+            <label for = "Others"> Others </label><br><br>
+            <input type="submit" value="Submit">    
+        </form> -->
+</body>
+
+</html>
